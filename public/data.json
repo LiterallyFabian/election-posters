@@ -1,0 +1,49 @@
+{
+  "parties": [
+    {
+      "name": "Centerpartiet",
+      "id": "c",
+      "color": "#009933",
+      "format": "png",
+      "posters": [
+        "Hela landet behövs",
+        "För Sveriges bästa",
+        "Fler sjuksköterskor, kortare vårdköer",
+        "Företagande och jobb bygger Sverige",
+        "Klimatet kräver vår handlingskraft",
+        "Medmänsklighet, inte rasism",
+        "Män som slår ska aldrig komma undan"
+      ]
+    },
+    {
+      "name": "Kristdemokraterna",
+      "id": "kd",
+      "color": "#231977",
+      "format": "png",
+      "posters": [
+        "Redo för en ny regering",
+        "Redo att kapa vårdköerna",
+        "Redo att bekämpa brotten",
+        "Redo att sänka bränslepriserna",
+        "Redo att bygga fler äldreboenden",
+        "Redo att förbättra förlossningsvården",
+        "Redo att knäcka gängen",
+        "Redo att fixa vägarna",
+        "Redo att höja pensionerna"
+      ]
+    },
+    {
+      "name": "Vänsterpartiet",
+      "id": "v",
+      "color": "#AF0000",
+      "format": "jpg",
+      "posters": [
+        "Andra lovar, vi agerar",
+        "Din trygghet är politikens ansvar",
+        "Med modet att förändra",
+        "Ta tillbaka kontrollen över välfärden",
+        "Vi bygger ett starkt Sverige"
+      ]
+    }
+  ]
+}
