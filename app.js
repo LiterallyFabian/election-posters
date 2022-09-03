@@ -22,7 +22,7 @@ connection.connect(function (e) {
     return console.error('error: ' + e.message);
   }
 
-  console.log('\nConnected to the MySQL server\n');
+  console.log(`\nConnected to the MySQL server ${process.env.mysql_database}\n`);
 });
 
 // view engine setup

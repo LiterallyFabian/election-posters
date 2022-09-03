@@ -1,27 +1,21 @@
 body {
   padding: 50px;
-  font: 14px "Livvic", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Livvic", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
 
 #quote {
-  margin: 30px 0 50px 0;
-}
+  margin: 30px 0 50px 0; }
 
 .cursor-pointer {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .poster {
   width: 200px;
   height: auto;
-  margin: auto;
-}
-.poster img {
-  width: 100%;
-}
+  margin: auto; }
+  .poster img {
+    width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

@@ -3,15 +3,23 @@ function vote(vote) {
     // 0 skip / neutral
     // 1 agree
 
-    votes.push({
+    voteData.votes.push({
         poster: currentPoster,
         agree: vote
     });
 
-    setQuote();
+    if (shownQuotes.length === minQuotes * 8) {
+        $.ajax('result', {
+            data: JSON.stringify(voteData),
+            contentType: 'application/json',
+            type: 'POST'
+        });
+    } else {
+        setQuote();
+    }
 }
 
-function show(){
+function show() {
     $("#poster-container").removeClass("d-none");
 }
 
@@ -19,7 +27,11 @@ let data;
 const occurrences = [];
 let minQuotes = Number.MAX_VALUE; // the party with the least quotes available. if this is 3 we can not show more than 3 posters per party, etc
 const shownQuotes = [];
-const votes = [];
+const voteData = {
+    votes: [],
+    id: uuidv4(),
+    date: new Date().toISOString().slice(0, 19).replace('T', ' ')
+};
 let currentPoster = null;
 
 // jquery document on ready
@@ -64,11 +76,16 @@ function getRandomPoster() {
 
     let i = Math.floor(Math.random() * party.posters.length);
 
-    let poster = {
+    return {
+        id: party.id,
         party: party.name,
         image: `images/${party.id}${i + 1}.${party.format}`,
         text: party.posters[i],
-    }
+    };
+}
 
-    return poster;
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
 }
