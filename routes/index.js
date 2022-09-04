@@ -45,7 +45,7 @@ router.get('/result/:id', function (req, res, next) {
         if (results.length === 0)
             res.status(404).send("Not found");
         else
-            res.status(200).send(results[0]);
+            res.render('result', {title: 'Affischkompassen', data: results[0]});
     });
 });
 

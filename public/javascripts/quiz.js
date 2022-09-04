@@ -1,4 +1,6 @@
 function vote(vote) {
+    $("#poster-container").addClass("d-none");
+
     // -1 disagree
     // 0 skip / neutral
     // 1 agree
@@ -9,6 +11,10 @@ function vote(vote) {
     });
 
     if (shownQuotes.length === minQuotes * 8) {
+        $(".res-btn").removeClass("d-none");
+        $(".answer-btn").addClass("d-none");
+        $("#quote").text("Du har nu besvarat alla frågor. Klicka på knappen nedan för att se resultatet.");
+        $("#poster-preview").attr("src", "images/clap-clapping.gif");
         $.ajax('result', {
             data: JSON.stringify(voteData),
             contentType: 'application/json',
@@ -21,6 +27,10 @@ function vote(vote) {
 
 function show() {
     $("#poster-container").removeClass("d-none");
+}
+
+function openResult(){
+    window.location.href = `result/${voteData.id}`;
 }
 
 let data;
@@ -65,7 +75,6 @@ function setQuote() {
     shownQuotes.push(poster.image);
     currentPoster = poster;
 
-    $("#poster-container").addClass("d-none");
     $("#quote").text("“" + poster.text + "”")
     $("#poster-preview").attr("src", poster.image);
 }
