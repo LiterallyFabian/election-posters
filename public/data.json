@@ -44,6 +44,19 @@
         "Ta tillbaka kontrollen över välfärden",
         "Vi bygger ett starkt Sverige"
       ]
+    },
+    {
+      "name": "Socialdemokraterna",
+      "id": "s",
+      "color": "#EE2020",
+      "format": "jpg",
+      "posters": [
+        "Tillsammans kan vi göra vårt Sverige bättre",
+        "En pension det går att leva på. Respekt för de som jobbat.",
+        "Skolan ska vara till för barnen, inte ägarna",
+        "Vi skärper straffen och rekryterar fler poliser",
+        "Ingen ung ska bli kriminell"
+      ]
     }
   ]
 }
