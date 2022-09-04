@@ -57,6 +57,37 @@
         "Vi skärper straffen och rekryterar fler poliser",
         "Ingen ung ska bli kriminell"
       ]
+    },
+    {
+      "name": "Sverigedemokraterna",
+      "id": "sd",
+      "color": "#FEDF09",
+      "format": "",
+      "posters": []
+    },
+    {
+      "name": "Miljöpartiet",
+      "id": "mp",
+      "color": "#83CF39",
+      "format": "jpg",
+      "posters": [
+      ]
+    },
+    {
+      "name": "Liberalerna",
+      "id": "l",
+      "color": "#6BB7EC",
+      "format": "png",
+      "posters": [
+        "Hellre fler läxförhör idag än polisförhör imorgon.",
+        "Rätt hjälp idag istället för rättshjälp imorgon.",
+        "Språkkrav idag. Minskad segregation imorgon.",
+        "Oui till Nato idag hellre än da till Putin imorgon.",
+        "Tidiga insatser nu istället för sena utryckningar sen.",
+        "Sol vind och vatten är en bra refräng, men vi behöver en stabil vers också.",
+        "En liberal borgerlig regering som tar tag i Sveriges problem.",
+        "Hellre utbyggd kärnkraft idag än planerade elavbrott i framtiden."
+      ]
     }
   ]
 }
