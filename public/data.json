@@ -62,15 +62,20 @@
       "name": "Sverigedemokraterna",
       "id": "sd",
       "color": "#FEDF09",
-      "format": "",
-      "posters": []
+      "format": "png",
+      "posters": [
+        "Sverige ska bli bra igen\n...och inget snack",
+        "Sänkta bränslepriser\n...och inget snack",
+        "Utvisa utländska kriminella\n...och inget snack"
+      ]
     },
     {
       "name": "Miljöpartiet",
       "id": "mp",
       "color": "#83CF39",
-      "format": "jpg",
+      "format": "png",
       "posters": [
+        "Alla ska vara med när Sverige ställer om."
       ]
     },
     {
@@ -88,6 +93,13 @@
         "En liberal borgerlig regering som tar tag i Sveriges problem.",
         "Hellre utbyggd kärnkraft idag än planerade elavbrott i framtiden."
       ]
+    },
+    {
+      "name": "Moderaterna",
+      "id": "m",
+      "color": "#1B49DD",
+      "format": "png",
+      "posters": []
     }
   ]
 }
