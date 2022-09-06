@@ -3,11 +3,15 @@ let router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Affischkompassen'});
+    res.render('index', {title: 'Affischvalet'});
 });
 
 router.get('/quiz', function (req, res, next) {
-    res.render('quiz', {title: 'Affischkompassen'});
+    res.render('quiz', {title: 'Affischvalet'});
+});
+
+router.get('/about', function (req, res, next) {
+    res.render('about', {title: 'Affischvalet'});
 });
 
 router.post('/vote', function (req, res, next) {
