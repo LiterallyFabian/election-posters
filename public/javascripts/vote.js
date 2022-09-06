@@ -29,7 +29,7 @@ let totalPosters = 0;
 
 $(document).ready(function () {
     // check if user has cookie
-    if (getCookie("user_id") === "") {
+    if (getCookie("user_id") === null) {
         setCookie("user_id", uuidv4(), 365);
     }
 
