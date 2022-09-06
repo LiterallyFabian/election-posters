@@ -51,23 +51,27 @@
         </li>
     </ul>
 
-    <h3>Tekniska detaljer</h3>
+    <h3>Tekniska detaljer & data</h3>
     <p>Projektets källkod finns offentligt tillgänglig
-        <a href="https://github.com/LiterallyFabian/election-posters">här</a>. Det är skapat med Node.js, Express, EJS, SCSS och MySQL.
+        <a href="https://github.com/LiterallyFabian/election-posters">här</a>. Projektets tech stack består av Node.js, Express, EJS, SCSS och MySQL.
     </p>
 
-    <h3>Data</h3>
     <ul>
         <li>
-            <a href="votes">Alla röster</a>
+            <a href="votes">Totala röster</a> (JSON)
         </li>
         <li>
-            <a href="data.json">Affischdatan</a>
+            <a href="raw">Individuella röster</a> (JSON, p = parti, t = text ID, v = röst)
+        </li>
+        <li>
+            <a href="data.json">Affischdatan</a> (JSON)
         </li>
         <li>
             Affischerna finns i mappen <code><a href="https://github.com/LiterallyFabian/election-posters/tree/master/public/images">public/images</a></code>. De är namngivna efter <code>{party.id}{posterIndex+1}.{party.format}</code>.
         </li>
     </ul>
+
+    <p>All data är CC0. Grafiskt material tillhör respektive parti.</p>
 
     <h3>Kontakt</h3>
     <p>Om du har några synpunkter, frågor, funderingar eller liknande kan du mejla mig.

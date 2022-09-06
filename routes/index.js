@@ -14,6 +14,10 @@ router.get('/about', function (req, res, next) {
     res.render('about', {title: 'Affischvalet'});
 });
 
+router.get('/result', function (req, res, next) {
+    res.render('result', {title: 'Affischvalet'});
+});
+
 router.post('/vote', function (req, res, next) {
     let data = req.body;
 
@@ -60,4 +64,24 @@ router.get('/votes', function (req, res, next) {
     });
 });
 
+router.get('/raw', function (req, res, next) {
+    connection.query(`SELECT party_id, poster_id, vote FROM votes`, function (err, results, fields) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Internal server error");
+        }
+
+        // rename columns
+        for (let i = 0; i < results.length; i++) {
+            results[i].p = results[i].party_id;
+            results[i].t = results[i].poster_id;
+            results[i].v = results[i].vote;
+            delete results[i].party_id;
+            delete results[i].poster_id;
+            delete results[i].vote;
+        }
+
+        res.status(200).send(results);
+    });
+});
 module.exports = router;
