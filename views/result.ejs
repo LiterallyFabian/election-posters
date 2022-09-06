@@ -11,101 +11,71 @@
 </head>
 <body>
 <div id="content" class="container">
-    <h1><%= title %></h1>
-    <i>Quiz taget <%= new Date(data.date).toDateString() %></i>
+    <h1><%= title %> - Resultat</h1>
     <hr>
 
     <%
-    let votes = JSON.parse(data.votes);
-    let result = [];
-    const parties = [{
-        id: "s",
-        name: "Socialdemokraterna"
-    }, {
-        id: "m",
-        name: "Moderaterna"
-    }, {
-        id: "c",
-        name: "Centerpartiet"
-    }, {
-        id: "l",
-        name: "Liberalerna"
-    }, {
-        id: "kd",
-        name: "Kristdemokraterna"
-    }, {
-        id: "v",
-        name: "Vänsterpartiet"
-    }, {
-        id: "mp",
-        name: "Miljöpartiet"
-    }, {
-        id: "sd",
-        name: "Sverigedemokraterna"
-    }];
-
-
-    for (let i = 0; i < parties.length; i++) {
-        result.push({
-            party: parties[i],
-            yesVotes: 0,
-            noVotes: 0,
-            neutralVotes: 0,
-            posters: []
-        });
+    const partyNames = {
+        C: "Centerpartiet",
+        KD: "Kristdemokraterna",
+        L: "Liberalerna",
+        M: "Moderaterna",
+        MP: "Miljöpartiet",
+        S: "Socialdemokraterna",
+        SD: "Sverigedemokraterna",
+        V: "Vänsterpartiet"
     }
 
-    for (let i = 0; i < votes.length; i++) {
-        let vote = votes[i];
-        let party = vote.poster.id;
-        let agree = vote.agree;
-        let partyIndex = result.findIndex(p => p.party.id === party);
+    const votesArray = Object.entries(data).flatMap(([party, questions]) => Object.entries(questions).map(([question, votes]) => ({
+        party,
+        question,
+        votes
+    })));
 
-        console.log("s")
-
-        if (agree === 1) {
-            result[partyIndex].yesVotes++;
-        } else if (agree === -1) {
-            result[partyIndex].noVotes++;
-        } else {
-            result[partyIndex].neutralVotes++;
-        }
-    }
-
-    // sort res by yesVotes
-
-    result.sort((a, b) => {
-        return b.yesVotes - a.yesVotes;
+    const orderedVotes = votesArray.sort((a, b) => {
+        const aYes = a.votes.yes || 0;
+        const aNo = a.votes.no || 0;
+        const bYes = b.votes.yes || 0;
+        const bNo = b.votes.no || 0;
+        return (bYes - bNo) - (aYes - aNo);
     });
 
-    console.log(result);
+    // order by percentage
+    const orderedVotesPercentage = votesArray.sort((a, b) => {
+        const aYes = a.votes.yes || 0;
+        const aNo = a.votes.no || 0;
+        const bYes = b.votes.yes || 0;
+        const bNo = b.votes.no || 0;
+        return (bYes / (bYes + bNo)) - (aYes / (aYes + aNo));
+    });
+
+    partyData = JSON.parse(partyData);
+
+    orderedVotesPercentage.forEach(poster => {
+        const party = partyData.parties.find(p => p.id === poster.party.toLowerCase());
+
+        // get yesPercent NaN safe
+        const yesPercent = ((poster.votes.yes || 0) / ((poster.votes.yes || 0) + (poster.votes.no || 0))) * 100 || 0;
+        const yesPercentWithSkip = ((poster.votes.yes || 0) / ((poster.votes.yes || 0) + (poster.votes.no || 0) + (poster.votes.skip || 0))) * 100 || 0;
+        const noPercentWithSkip = ((poster.votes.no || 0) / ((poster.votes.yes || 0) + (poster.votes.no || 0) + (poster.votes.skip || 0))) * 100 || 0;
+        const skipPercentWithSkip = ((poster.votes.skip || 0) / ((poster.votes.yes || 0) + (poster.votes.no || 0) + (poster.votes.skip || 0))) * 100 || 0;
     %>
 
-    <% result.forEach(party => {
-        let yesPercent = Math.round(party.yesVotes / (party.yesVotes + party.noVotes + party.neutralVotes) * 100);
-        let noPercent = Math.round(party.noVotes / (party.yesVotes + party.noVotes + party.neutralVotes) * 100);
-        let neutralPercent = Math.round(party.neutralVotes / (party.yesVotes + party.noVotes + party.neutralVotes) * 100);
-
-        yesPercent = isNaN(yesPercent) ? 0 : yesPercent;
-        noPercent = isNaN(noPercent) ? 0 : noPercent;
-        neutralPercent = isNaN(neutralPercent) ? 0 : neutralPercent;
-    %>
-
-    <div class="row">
-        <div class="col-2">
-            <img src="../images/logo-<%= party.party.id %>.jpg" alt="logo" width="100px" height="100px">
-            <p><%= party.name %></p>
+    <div class="row" style="margin:10px 0;">
+        <div class="col-3">
+            <img src="../images/logo-<%= poster.party.toLowerCase() %>.jpg" alt="logo" width="100px" height="100px">
+            <p><%= partyNames[poster.party] %></p>
         </div>
-        <div class="col-6">
-            <h2><%= yesPercent %>% <%= party.party.name %></h2>
+        <div class="col-9">
+            <h2><%= yesPercent.toFixed(1) %>% - <%= party.posters[poster.question]; %> <a href="<%=`images/${party.id}${parseInt(poster.question)+1}.${party.format}`%>">&#128279;</a> </h2>
             <div class="d-flex">
-                <div style="width: <%= yesPercent %>%; height: 30px; background-color: green;"></div>
-                <div style="width: <%= noPercent %>%; height: 30px; background-color: gray;"></div>
-                <div style="width: <%= neutralPercent %>%; height: 30px; background-color: red;"></div>
+                <div style="width: <%= yesPercentWithSkip %>%; height: 30px; background-color: green;"></div>
+                <div style="width: <%= skipPercentWithSkip %>%; height: 30px; background-color: gray;"></div>
+                <div style="width: <%= noPercentWithSkip %>%; height: 30px; background-color: red;"></div>
             </div>
-            <i><b><%= party.yesVotes %></b> ja,
-                <b><%= party.noVotes %></b> nej,
-                <b><%= party.neutralVotes %></b> skippade</i>
+            <i><b><%= poster.votes.yes || 0 %></b> ja,
+                <b><%= poster.votes.no || 0 %></b> nej,
+                <b><%= poster.votes.skip || 0 %></b> skippade</i>
         </div>
     </div>
 

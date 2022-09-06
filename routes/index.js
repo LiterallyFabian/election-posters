@@ -1,5 +1,6 @@
 let express = require('express');
 let router = express.Router();
+let fs = require('fs');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -15,7 +16,13 @@ router.get('/about', function (req, res, next) {
 });
 
 router.get('/result', function (req, res, next) {
-    res.render('result', {title: 'Affischvalet'});
+    getVotes(function (err, data) {
+        if (err) {
+            res.render('error', {message: 'Error when getting votes', error: err});
+        }
+
+        res.render('result', {title: 'Affischvalet', data: data, partyData: fs.readFileSync('public/data.json', 'utf8')});
+    });
 });
 
 router.post('/vote', function (req, res, next) {
@@ -37,10 +44,23 @@ router.post('/vote', function (req, res, next) {
 });
 
 router.get('/votes', function (req, res, next) {
+    getVotes(function (err, data) {
+        if (err)
+            return res.status(500).send("Internal server error");
+
+        res.status(200).send(data);
+    });
+});
+
+/**
+ * Get all votes from the database
+ * @param callback function(err, data) where data is an array of votes
+ */
+function getVotes(callback){
     connection.query(`SELECT party_id, poster_id, vote, COUNT(*) AS count FROM votes GROUP BY party_id, poster_id, vote`, function (err, results, fields) {
         if (err) {
             console.log(err);
-            return res.status(500).send("Internal server error");
+            callback(err, null);
         }
 
         let data = {};
@@ -60,9 +80,9 @@ router.get('/votes', function (req, res, next) {
             data[party][poster][vote] = count;
         }
 
-        res.status(200).send(data);
+        callback(null, data);
     });
-});
+}
 
 router.get('/raw', function (req, res, next) {
     connection.query(`SELECT party_id, poster_id, vote FROM votes`, function (err, results, fields) {
