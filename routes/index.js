@@ -20,8 +20,7 @@ router.post('/vote', function (req, res, next) {
     connection.query(`INSERT INTO votes (user_id, party_id, poster_id, date, vote) VALUES ('${data.user_id}', '${data.party_id}', '${data.poster_id}', '${data.date}', '${data.vote}')`, function (err, results, fields) {
         if (err) {
 
-
-            if (err.code === "ER_DUP_ENTRY") // duplicate entries are accepted but ignored
+            if (err.code === "ER_DUP_ENTRY") // duplicate entries are processed but ignored
                 return res.status(409).send("Duplicate entry");
             else{
                 console.log(err);
@@ -30,6 +29,34 @@ router.post('/vote', function (req, res, next) {
         }
 
         res.status(200).send("OK");
+    });
+});
+
+router.get('/votes', function (req, res, next) {
+    connection.query(`SELECT party_id, poster_id, vote, COUNT(*) AS count FROM votes GROUP BY party_id, poster_id, vote`, function (err, results, fields) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Internal server error");
+        }
+
+        let data = {};
+
+        for (let i = 0; i < results.length; i++) {
+            let party = results[i].party_id;
+            let poster = results[i].poster_id;
+            let vote = results[i].vote;
+            let count = results[i].count;
+
+            if (!data.hasOwnProperty(party))
+                data[party] = {};
+
+            if (!data[party].hasOwnProperty(poster))
+                data[party][poster] = {};
+
+            data[party][poster][vote] = count;
+        }
+
+        res.status(200).send(data);
     });
 });
 
