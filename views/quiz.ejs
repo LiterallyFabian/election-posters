@@ -21,16 +21,18 @@
         </h2>
 
 
-
-        <p>Ett av de åtta riksdagspartierna har skrivit detta på sin valaffisch.<br>Håller du med, står du bakom påståendet eller är detta något du vill ha?</p>
+        <p>Ett av de åtta riksdagspartierna har skrivit detta på sin valaffisch.<br>Håller du med, står du bakom påståendet eller är detta något du vill ha?
+        </p>
 
         <p>
             <button id="yes" class="btn btn-success btn-lg btn-block answer-btn" onclick="vote(1)" disabled>Ja</button>
             <button id="yes" class="btn btn-secondary btn-lg btn-block answer-btn" onclick="vote(0)" disabled>Hoppa över</button>
             <button id="yes" class="btn btn-danger btn-lg btn-block answer-btn" onclick="vote(-1)" disabled>Nej</button>
-            <button id="yes" class="btn btn-primary btn-lg btn-block res-btn d-none" onclick="openResult()">Se resultat</button>
+            <a href="result">
+                <button id="yes" class="btn btn-primary btn-lg btn-block res-btn d-none">Se resultat</button>
+            </a>
         </p>
-        <u><i class="cursor-pointer text-secondary" onclick="show()">Visa affisch</i></u>
+        <u><i class="show-poster cursor-pointer text-secondary" onclick="show()">Visa affisch</i></u>
 
         <i id="remaining" class="text-secondary">0/0</i>
 

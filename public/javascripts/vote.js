@@ -20,7 +20,14 @@ function vote(vote) {
         type: 'POST'
     });
 
-    setQuote();
+    if (shownQuotes.length <= totalPosters)
+        setQuote();
+    else {
+        $("#quote").text("Tack för att du röstat!");
+        $(".answer-btn").prop("disabled", true);
+        $(".show-poster").addClass("d-none");
+        $(".res-btn").removeClass("d-none");
+    }
 }
 
 let data;
@@ -82,7 +89,7 @@ function getRandomPoster() {
 /**
  * Show the current poster
  */
-function show(){
+function show() {
     $("#poster-preview").attr("src", currentPoster.image);
     $("#poster-container").removeClass("d-none");
 }
