@@ -62,7 +62,6 @@ function setQuote() {
     currentPoster = poster;
 
     $("#quote").text("“" + poster.text + "”")
-    $("#poster-preview").attr("src", poster.image);
 }
 
 function getRandomPoster() {
@@ -78,6 +77,14 @@ function getRandomPoster() {
         text: party.posters[i],
         posterIndex: i
     };
+}
+
+/**
+ * Show the current poster
+ */
+function show(){
+    $("#poster-preview").attr("src", currentPoster.image);
+    $("#poster-container").removeClass("d-none");
 }
 
 function uuidv4() {
