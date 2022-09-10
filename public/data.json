@@ -99,8 +99,11 @@
       "name": "Moderaterna",
       "id": "m",
       "color": "#1B49DD",
-      "format": "png",
-      "posters": []
+      "format": "jpg",
+      "posters": [
+        "Ungas psykiska hälsa måste tas på allvar",
+        "Nu får vi ordning på Sverige"
+      ]
     }
   ]
 }
