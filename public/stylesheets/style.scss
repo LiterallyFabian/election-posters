@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Livvic", Helvetica, Arial, sans-serif;
 }
 
@@ -19,4 +19,16 @@ body {
   img {
     width: 100%;
   }
+}
+
+.pc-container {
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+}
+
+#content {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
