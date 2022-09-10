@@ -1,35 +1,27 @@
 body {
   padding: 20px;
-  font: 14px "Livvic", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Livvic", Helvetica, Arial, sans-serif; }
 
 #quote {
-  margin: 30px 0 50px 0;
-}
+  margin: 30px 0 50px 0; }
 
 .cursor-pointer {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .poster {
   width: 200px;
   height: auto;
-  margin: auto;
-}
-.poster img {
-  width: 100%;
-}
+  margin: auto; }
+  .poster img {
+    width: 100%; }
 
 @media (min-width: 768px) {
   .pc-container {
-    max-width: 720px;
-  }
-}
+    max-width: 720px; } }
 
 #content {
   max-width: 1000px;
   margin-left: auto;
-  margin-right: auto;
-}
+  margin-right: auto; }
 
 /*# sourceMappingURL=style.css.map */
